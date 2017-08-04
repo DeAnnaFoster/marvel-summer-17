@@ -8,29 +8,48 @@ function MarvelController() {
       var character = arr[i];
       template += `<div>${character.name} <button onclick="app.controllers.marvelController.addCharacter(${character.id})">Add</button></div>`
     }
-    document.getElementById('search-results').innerHTML = template
+    
+    document.getElementById('marvel-list').innerHTML = template;
+  }
+
+  function redrawMarvel() {
+    var arr = service.getMarvel();
+    var template = ''
+
+    for (var i = 0; i < arr.length; i++) {
+      var character = arr[i];
+      template += `<div>${character.name} <button onclick="app.controllers.marvelController.addCharacter(${character.id})">Add</button></div>`
+    }
+
+    document.getElementById('marvel-list').innerHTML = template;
   }
 
   drawRoster = function () {
-    //TODO: DRAW ROSTER
-    var roster = service.getRoster()
-    var template = ''
+    var roster = service.getRoster();
+    var template = '';
 
     roster.forEach(char => {
-      template += `<div>${char.name}</div>`
+      template += `<div>${char.name} <button onclick="app.controllers.marvelController.removeCharacter(${char.id})">Remove</button></div>`;
     })
 
-    document.getElementById('my-roster').innerHTML = template
+    document.getElementById('my-characters').innerHTML = template;
+  }
 
+  this.removeCharacter = function(id){
+    service.removeCharacter(id);
+    drawRoster();
+    redrawMarvel();
   }
 
   this.addCharacter = function (id) {
-
-    service.addCharacter(id)
-    drawRoster()
-
+    var char = service.addCharacterToRoster(id);
+    drawRoster();
+    redrawMarvel();
   }
 
-
-  service.search('', drawMarvel);
+  this.search = function(event){
+    event.preventDefault();
+    let searchPhrase = event.target.searchTerm.value;
+    service.search(searchPhrase, drawMarvel);
+  }
 }

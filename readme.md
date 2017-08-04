@@ -27,9 +27,9 @@ function getMarvel(query, cb){
 
 ### Adding Heroes
 
-Once you are getting the marvel data its now time to start adding heroes to your own team. Once a hero has been added to the user team he or she should be removed from the `marvel-list` and only show up on the `my-characters` section of the page.
+Once you are getting the marvel data its now time to start adding heroes to your own team. Once a hero has been added to the user team he or she should be removed from the `marvel-list` and only show up on the `my-characters` section of the page. [DONE]
 
-A user should be able to remove heroes from their team and have them added back to the `marvel-characters` section. 
+A user should be able to remove heroes from their team and have them added back to the `marvel-characters` section. [DONE]
 
 Once you get the two lists working try adding some bonus features 
 
